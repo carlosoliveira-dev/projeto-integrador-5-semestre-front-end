@@ -1,4 +1,4 @@
-export default function page() {
+export default function CadastrarFornecedoresPage() {
   return (
     <>
     <header>

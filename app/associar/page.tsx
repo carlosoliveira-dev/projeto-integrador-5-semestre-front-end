@@ -1,4 +1,4 @@
-export default function Association() {
+export default function AssociarPage() {
   return (
     <>
     <header>

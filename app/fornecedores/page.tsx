@@ -1,4 +1,4 @@
-export default function page() {
+export default function FornecedoresPage() {
   return (
     <p>Lista de fornecedores</p>
   )
