@@ -28,6 +28,9 @@ export default function FornecedoresPage() {
                 <p><span aria-hidden="true">⌕</span><span><small>Telefone</small>{supplier.phone}</span></p>
                 <p><span aria-hidden="true">⌖</span><span><small>Endereço</small>{supplier.address}</span></p>
               </div>
+              <div className="supplier-actions">
+                <Link className="button button-outline" href={`/fornecedores/${encodeURIComponent(supplier.id)}/editar`}>Editar fornecedor</Link>
+              </div>
             </article>
           ))}
         </div>

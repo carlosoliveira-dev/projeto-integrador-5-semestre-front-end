@@ -344,7 +344,15 @@ type InventoryActions = {
   signUp: (name: string, email: string, password: string) => Promise<void>;
   signOut: () => void;
   addSupplier: (supplier: Omit<Supplier, "id">) => Promise<Supplier>;
+  updateSupplier: (
+    supplierId: string,
+    supplier: Omit<Supplier, "id">,
+  ) => Promise<Supplier>;
   addProduct: (
+    product: Omit<Product, "id" | "supplierIds">,
+  ) => Promise<Product>;
+  updateProduct: (
+    productId: string,
     product: Omit<Product, "id" | "supplierIds">,
   ) => Promise<Product>;
   associateSupplier: (
@@ -390,6 +398,32 @@ const actions: InventoryActions = {
     updateState({ suppliers: [...state.suppliers, mapped] });
     return mapped;
   },
+  async updateSupplier(supplierId, supplier) {
+    const response = await request<{ supplier: ApiSupplier }>(
+      `/suppliers/${encodeURIComponent(supplierId)}`,
+      {
+        method: "PUT",
+        body: {
+          companyName: supplier.companyName,
+          cnpj: supplier.cnpj,
+          primaryContactName: supplier.contact,
+          address: supplier.address,
+          phone: supplier.phone,
+          email: supplier.email,
+        },
+      },
+    );
+    if (!response?.supplier) {
+      throw new ApiError("A API não retornou os dados do fornecedor atualizado.");
+    }
+    const mapped = mapSupplier(response.supplier);
+    updateState({
+      suppliers: state.suppliers.map((item) =>
+        item.id === supplierId ? mapped : item,
+      ),
+    });
+    return mapped;
+  },
   async addProduct(product) {
     if (!state.user) throw new ApiError("Entre na sua conta para cadastrar produtos.");
     const created = await request<ApiProduct>(`/products/${state.user.id}`, {
@@ -409,6 +443,37 @@ const actions: InventoryActions = {
     });
     const mapped = mapProduct(created);
     updateState({ products: [...state.products, mapped] });
+    return mapped;
+  },
+  async updateProduct(productId, product) {
+    if (!state.user) throw new ApiError("Entre na sua conta para editar produtos.");
+    const response = await request<{ product: ApiProduct }>(
+      `/products/${encodeURIComponent(productId)}`,
+      {
+        method: "PUT",
+        authenticated: true,
+        body: {
+          userId: state.user.id,
+          name: product.name,
+          description: product.description,
+          barCode: product.barcode,
+          stockQuantity: String(product.quantity),
+          category: product.category,
+          expirationDate: product.expirationDate,
+          image: product.image,
+        },
+      },
+    );
+    if (!response?.product) {
+      throw new ApiError("A API não retornou os dados do produto atualizado.");
+    }
+    const current = state.products.find((item) => item.id === productId);
+    const mapped = mapProduct(response.product, current?.supplierIds ?? []);
+    updateState({
+      products: state.products.map((item) =>
+        item.id === productId ? mapped : item,
+      ),
+    });
     return mapped;
   },
   async associateSupplier(productId, supplierId) {

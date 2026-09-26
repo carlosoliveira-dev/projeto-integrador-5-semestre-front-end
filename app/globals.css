@@ -146,6 +146,8 @@ tbody tr:last-child td { border-bottom: 0; }
 .product-quantity small { color: #a0a2b0; font-size: 8px; font-weight: 700; letter-spacing: .6px; }
 .product-quantity strong { font-size: 19px; }
 .product-quantity span { color: #9294a4; font-size: 10px; }
+.product-actions { display: flex; align-items: center; gap: 7px; }
+.product-actions .button { padding: 0 12px; }
 .supplier-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 15px; }
 .supplier-card { padding: 21px; background: white; border: 1px solid #eeeff4; border-radius: 14px; transition: box-shadow .18s, transform .18s; }
 .supplier-card-top { display: flex; align-items: center; justify-content: space-between; }
@@ -157,6 +159,9 @@ tbody tr:last-child td { border-bottom: 0; }
 .supplier-details p { display: flex; gap: 8px; margin: 0; color: #797b8f; font-size: 11px; overflow-wrap: anywhere; }
 .supplier-details p > span:first-child { color: #8a83ea; font-size: 14px; }
 .supplier-details small { display: block; margin-bottom: 4px; color: #a4a5b3; font-size: 8px; font-weight: 700; letter-spacing: .6px; text-transform: uppercase; }
+.supplier-actions { display: flex; justify-content: flex-end; margin-top: 17px; padding-top: 14px; border-top: 1px solid #f0f0f5; }
+.image-edit-preview { display: flex; align-items: center; gap: 11px; }
+.image-edit-preview img { border-radius: 9px; object-fit: cover; }
 
 .empty-state { min-height: 250px; padding: 40px 20px; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; background: white; border: 1px dashed #dedfeb; border-radius: 15px; }
 .empty-icon { width: 52px; height: 52px; margin-bottom: 13px; display: grid; place-items: center; border-radius: 16px; color: #7169dc; background: #f0efff; font-size: 24px; }
@@ -259,7 +264,8 @@ tbody tr:last-child td { border-bottom: 0; }
   .page-heading h1 { font-size: 27px; }
   .page-heading > .button { align-self: stretch; }
   .product-row { flex-wrap: wrap; }
-  .product-row .button { width: 100%; }
+  .product-actions { width: 100%; }
+  .product-actions .button { flex: 1; }
   .product-quantity { margin-left: auto; }
   .supplier-grid { grid-template-columns: 1fr; }
   .association-layout { grid-template-columns: 1fr; }
