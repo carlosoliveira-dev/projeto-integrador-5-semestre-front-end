@@ -14,7 +14,7 @@ function ShellContents({ children }: { children: ReactNode }) {
 
   return (
     <>
-      <header className="site-header">
+      <header className={`site-header${!user && !isLoginPage ? " site-header-login" : ""}`}>
         <Link className="brand" href="/">
           <span className="brand-mark" aria-hidden="true">E</span>
           <span>estoque<span className="brand-accent">fácil</span></span>
