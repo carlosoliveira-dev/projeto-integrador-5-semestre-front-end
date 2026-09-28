@@ -47,9 +47,11 @@ button:focus-visible, a:focus-visible, input:focus-visible, textarea:focus-visib
 .brand-mark { width: 34px; height: 34px; border-radius: 11px; color: #fff; background: var(--purple); display: grid; place-items: center; font-size: 18px; font-weight: 700; box-shadow: 0 5px 12px #635bdb38; }
 .brand-accent { color: var(--purple); }
 .main-nav { display: flex; align-items: center; gap: 8px; color: #676a7d; font-size: 13px; font-weight: 600; }
+.nav-links,.nav-account { display: flex; align-items: center; gap: 8px; }
 .main-nav a { padding: 10px 13px; border-radius: 9px; transition: color .18s, background .18s; }
 .main-nav a:hover { color: var(--purple); background: #f5f4ff; }
 .main-nav .nav-action { color: var(--purple); background: #f3f2ff; }
+.main-nav a.is-active,.main-nav a.is-active:hover { color: #fff; background: var(--purple); box-shadow: 0 4px 12px #635bdb30; }
 .nav-user { max-width: 140px; overflow: hidden; padding-left: 8px; color: #77798d; text-overflow: ellipsis; white-space: nowrap; font-size: 11px; }
 .nav-logout { border: 0; padding: 9px 10px; border-radius: 8px; color: #77798d; background: transparent; cursor: pointer; font-size: 11px; font-weight: 700; }
 .nav-logout:hover { color: #b34f49; background: #fff0ed; }
@@ -249,9 +251,14 @@ tbody tr:last-child td { border-bottom: 0; }
 .auth-required > p:not(.eyebrow) { max-width: 450px; margin: 10px 0 20px; color: #858799; font-size: 13px; line-height: 1.65; }
 
 @media (max-width: 760px) {
-  .site-header { height: auto; min-height: 68px; padding: 12px 22px; align-items: flex-start; flex-direction: column; gap: 10px; }
-  .main-nav { width: 100%; overflow-x: auto; gap: 2px; }
-  .main-nav a { padding: 8px 10px; white-space: nowrap; font-size: 11px; }
+  .site-header { height: auto; min-height: 68px; padding: 14px 22px; align-items: stretch; flex-direction: column; gap: 14px; }
+  .main-nav { width: 100%; flex-direction: column; align-items: stretch; gap: 8px; }
+  .nav-links { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 7px; }
+  .main-nav a { min-height: 42px; display: flex; align-items: center; justify-content: center; padding: 9px 10px; text-align: center; white-space: normal; font-size: 12px; }
+  .main-nav .nav-action { justify-content: center; }
+  .nav-account { justify-content: flex-end; gap: 6px; padding-top: 7px; border-top: 1px solid var(--line); }
+  .nav-user { max-width: min(60vw, 220px); margin-right: auto; padding-left: 2px; font-size: 12px; }
+  .nav-logout { min-height: 38px; padding: 8px 12px; }
   .page-shell { width: min(100% - 32px, 560px); padding-top: 25px; }
   .site-footer { padding: 17px 20px; }
   .welcome-panel { min-height: 250px; padding: 28px 25px; }

@@ -9,6 +9,8 @@ function ShellContents({ children }: { children: ReactNode }) {
   const pathname = usePathname();
   const { storageError, ready, user, signOut } = useInventory();
   const isLoginPage = pathname === "/login";
+  const isActiveRoute = (href: string) =>
+    pathname === href || (href !== "/" && pathname.startsWith(`${href}/`));
 
   return (
     <>
@@ -19,16 +21,52 @@ function ShellContents({ children }: { children: ReactNode }) {
         </Link>
         {user ? (
           <nav className="main-nav" aria-label="Navegação principal">
-            <Link href="/">Visão geral</Link>
-            <Link href="/produtos">Produtos</Link>
-            <Link href="/fornecedores">Fornecedores</Link>
-            <Link className="nav-action" href="/associar">Associações</Link>
-            <span className="nav-user">{user.name}</span>
-            <button className="nav-logout" type="button" onClick={signOut}>Sair</button>
+            <div className="nav-links">
+              <Link
+                className={isActiveRoute("/") ? "is-active" : undefined}
+                href="/"
+                aria-current={isActiveRoute("/") ? "page" : undefined}
+              >
+                Visão geral
+              </Link>
+              <Link
+                className={isActiveRoute("/produtos") ? "is-active" : undefined}
+                href="/produtos"
+                aria-current={isActiveRoute("/produtos") ? "page" : undefined}
+              >
+                Produtos
+              </Link>
+              <Link
+                className={isActiveRoute("/fornecedores") ? "is-active" : undefined}
+                href="/fornecedores"
+                aria-current={isActiveRoute("/fornecedores") ? "page" : undefined}
+              >
+                Fornecedores
+              </Link>
+              <Link
+                className={`nav-action${isActiveRoute("/associar") ? " is-active" : ""}`}
+                href="/associar"
+                aria-current={isActiveRoute("/associar") ? "page" : undefined}
+              >
+                Associações
+              </Link>
+            </div>
+            <div className="nav-account">
+              <span className="nav-user">{user.name}</span>
+              <button className="nav-logout" type="button" onClick={signOut}>Sair</button>
+            </div>
           </nav>
         ) : isLoginPage ? null : (
           <nav className="main-nav" aria-label="Navegação principal">
-            <Link className="nav-action" href="/login">Entrar</Link>
+            <div className="nav-links">
+              <Link
+                className={`nav-action${isActiveRoute("/login") ? " is-active" : ""}`}
+                href="/login"
+                aria-current={isActiveRoute("/login") ? "page" : undefined}
+              >
+                Entrar
+              </Link>
+            </div>
           </nav>
         )}
       </header>
