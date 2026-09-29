@@ -18,6 +18,7 @@ npm run dev
 
 ## deploy estático no Render
 
+- O Blueprint está definido em [`render.yaml`](./render.yaml). No Render, crie um Blueprint apontando para este repositório e informe o valor público de `NEXT_PUBLIC_API_URL` quando solicitado.
 - Build Command: `npm run build`
 - Publish Directory: `out`
 - Configure `NEXT_PUBLIC_API_URL` com a URL base do backend. Essa variável é incorporada no build, então defina-a antes da publicação.
