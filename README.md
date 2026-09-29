@@ -24,5 +24,7 @@ npm run dev
 
 As páginas de edição usam rotas estáticas com o ID na query string, por exemplo `/produtos/editar/?id=123` e `/fornecedores/editar/?id=123`.
 
+No export estático, a navegação entre páginas recarrega o documento para funcionar em hospedagens estáticas sem servidor Next.js.
+
 # artigos
 [Mastering API Testing with Supertest, Express.js, and Jest](https://www.dennisokeeffe.com/blog/2023-10-27-testing-express-apps-with-jest-and-supertest)

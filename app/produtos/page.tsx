@@ -1,7 +1,7 @@
 "use client";
 
-import Link from "next/link";
 import Image from "next/image";
+import StaticLink from "../components/static-link";
 import { useInventory } from "../inventory-store";
 
 export default function ProdutosPage() {
@@ -11,7 +11,7 @@ export default function ProdutosPage() {
     <div className="content-page">
       <div className="page-heading">
         <div><p className="eyebrow">CATÁLOGO DE ESTOQUE</p><h1>Produtos</h1><p>Consulte e gerencie os itens cadastrados no seu estoque.</p></div>
-        <Link className="button button-primary" href="/produtos/cadastrar"><span aria-hidden="true">＋</span> Novo produto</Link>
+        <StaticLink className="button button-primary" href="/produtos/cadastrar"><span aria-hidden="true">＋</span> Novo produto</StaticLink>
       </div>
       <div className="list-summary">
         <span><strong>{ready ? products.length : "—"}</strong> produtos</span>
@@ -33,8 +33,8 @@ export default function ProdutosPage() {
                 </div>
                 <div className="product-quantity"><small>EM ESTOQUE</small><strong>{product.quantity}</strong><span>unidades</span></div>
                 <div className="product-actions">
-                  <Link className="button button-outline" href={`/produtos/editar?id=${encodeURIComponent(product.id)}`}>Editar</Link>
-                  <Link className="button button-quiet" href="/associar">Fornecedores <span aria-hidden="true">→</span></Link>
+                  <StaticLink className="button button-outline" href={`/produtos/editar/?id=${encodeURIComponent(product.id)}`}>Editar</StaticLink>
+                  <StaticLink className="button button-quiet" href="/associar/">Fornecedores <span aria-hidden="true">→</span></StaticLink>
                 </div>
               </article>
             );
@@ -45,7 +45,7 @@ export default function ProdutosPage() {
           <span className="empty-icon" aria-hidden="true">▦</span>
           <h2>Seu catálogo está vazio</h2>
           <p>Cadastre seu primeiro produto para acompanhar as quantidades em estoque.</p>
-          <Link className="button button-primary" href="/produtos/cadastrar">Cadastrar produto</Link>
+          <StaticLink className="button button-primary" href="/produtos/cadastrar/">Cadastrar produto</StaticLink>
         </div>
       )}
     </div>

@@ -1,55 +1,55 @@
 "use client";
 
-import Link from "next/link";
 import { usePathname } from "next/navigation";
 import type { ReactNode } from "react";
+import StaticLink from "./components/static-link";
 import { InventoryProvider, useInventory } from "./inventory-store";
 
 function ShellContents({ children }: { children: ReactNode }) {
   const pathname = usePathname();
   const { storageError, ready, user, signOut } = useInventory();
-  const isLoginPage = pathname === "/login";
+  const isLoginPage = pathname === "/login" || pathname === "/login/";
   const isActiveRoute = (href: string) =>
     pathname === href || (href !== "/" && pathname.startsWith(`${href}/`));
 
   return (
     <>
       <header className={`site-header${!user && !isLoginPage ? " site-header-login" : ""}`}>
-        <Link className="brand" href="/">
+        <StaticLink className="brand" href="/">
           <span className="brand-mark" aria-hidden="true">E</span>
           <span>estoque<span className="brand-accent">fácil</span></span>
-        </Link>
+        </StaticLink>
         {user ? (
           <nav className="main-nav" aria-label="Navegação principal">
             <div className="nav-links">
-              <Link
+              <StaticLink
                 className={isActiveRoute("/") ? "is-active" : undefined}
                 href="/"
                 aria-current={isActiveRoute("/") ? "page" : undefined}
               >
                 Visão geral
-              </Link>
-              <Link
+              </StaticLink>
+              <StaticLink
                 className={isActiveRoute("/produtos") ? "is-active" : undefined}
-                href="/produtos"
+                href="/produtos/"
                 aria-current={isActiveRoute("/produtos") ? "page" : undefined}
               >
                 Produtos
-              </Link>
-              <Link
+              </StaticLink>
+              <StaticLink
                 className={isActiveRoute("/fornecedores") ? "is-active" : undefined}
-                href="/fornecedores"
+                href="/fornecedores/"
                 aria-current={isActiveRoute("/fornecedores") ? "page" : undefined}
               >
                 Fornecedores
-              </Link>
-              <Link
+              </StaticLink>
+              <StaticLink
                 className={`nav-action${isActiveRoute("/associar") ? " is-active" : ""}`}
-                href="/associar"
+                href="/associar/"
                 aria-current={isActiveRoute("/associar") ? "page" : undefined}
               >
                 Associações
-              </Link>
+              </StaticLink>
             </div>
             <div className="nav-account">
               <span className="nav-user">{user.name}</span>
@@ -59,13 +59,13 @@ function ShellContents({ children }: { children: ReactNode }) {
         ) : isLoginPage ? null : (
           <nav className="main-nav" aria-label="Navegação principal">
             <div className="nav-links">
-              <Link
+              <StaticLink
                 className={`nav-action${isActiveRoute("/login") ? " is-active" : ""}`}
-                href="/login"
+                href="/login/"
                 aria-current={isActiveRoute("/login") ? "page" : undefined}
               >
                 Entrar
-              </Link>
+              </StaticLink>
             </div>
           </nav>
         )}
@@ -80,7 +80,7 @@ function ShellContents({ children }: { children: ReactNode }) {
             <p className="eyebrow">ACESSO À SUA CONTA</p>
             <h1>{ready ? "Entre para gerenciar seu estoque" : "Conectando à sua conta..."}</h1>
             <p>Produtos e associações são protegidos pela API. Entre ou crie uma conta para continuar.</p>
-            {ready && <Link className="button button-primary" href="/login">Entrar ou criar conta</Link>}
+            {ready && <StaticLink className="button button-primary" href="/login/">Entrar ou criar conta</StaticLink>}
           </section>
         )}
       </main>

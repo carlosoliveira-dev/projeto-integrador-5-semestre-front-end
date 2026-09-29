@@ -1,12 +1,10 @@
 "use client";
 
-import Link from "next/link";
-import { useRouter } from "next/navigation";
 import { useState, type FormEvent } from "react";
+import StaticLink, { navigateToStaticRoute } from "../components/static-link";
 import { useInventory } from "../inventory-store";
 
 export default function LoginPage() {
-  const router = useRouter();
   const { signIn, signUp, user } = useInventory();
   const [registering, setRegistering] = useState(false);
   const [name, setName] = useState("");
@@ -25,7 +23,7 @@ export default function LoginPage() {
       else await signIn(email.trim(), password);
       setSuccess(true);
       setFeedback("Acesso realizado com sucesso. Você já pode usar o sistema.");
-      router.push("/");
+      navigateToStaticRoute("/");
     } catch (error) {
       setSuccess(false);
       setFeedback(
@@ -73,7 +71,7 @@ export default function LoginPage() {
             setFeedback("");
           }}>{registering ? "Entrar" : "Criar conta"}</button>
         </p>
-        <Link className="auth-home-link" href="/">Voltar ao início</Link>
+        <StaticLink className="auth-home-link" href="/">Voltar ao início</StaticLink>
       </section>
     </div>
   );

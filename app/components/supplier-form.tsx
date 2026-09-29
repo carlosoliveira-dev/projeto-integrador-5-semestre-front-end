@@ -1,8 +1,7 @@
 "use client";
 
-import Link from "next/link";
-import { useRouter } from "next/navigation";
 import { useState, type FormEvent } from "react";
+import StaticLink, { navigateToStaticRoute } from "./static-link";
 import {
   digitsOnly,
   formatCnpj,
@@ -35,7 +34,6 @@ function fieldsFromSupplier(supplier?: Supplier): SupplierFields {
 }
 
 export default function SupplierForm({ supplier }: { supplier?: Supplier }) {
-  const router = useRouter();
   const { suppliers, addSupplier, updateSupplier, ready } = useInventory();
   const editing = !!supplier;
   const [fields, setFields] = useState(() => fieldsFromSupplier(supplier));
@@ -104,7 +102,7 @@ export default function SupplierForm({ supplier }: { supplier?: Supplier }) {
     try {
       if (supplier) {
         await updateSupplier(supplier.id, data);
-        router.push("/fornecedores");
+        navigateToStaticRoute("/fornecedores/");
         return;
       }
       await addSupplier(data);
@@ -127,7 +125,7 @@ export default function SupplierForm({ supplier }: { supplier?: Supplier }) {
     <div className="content-page form-page">
       <div className="page-heading">
         <div>
-          <Link className="back-link" href="/fornecedores"><span aria-hidden="true">←</span> Voltar para fornecedores</Link>
+          <StaticLink className="back-link" href="/fornecedores/"><span aria-hidden="true">←</span> Voltar para fornecedores</StaticLink>
           <p className="eyebrow">PARCEIROS COMERCIAIS</p>
           <h1>{editing ? "Editar fornecedor" : "Cadastro de fornecedor"}</h1>
           <p>{editing ? "Atualize os dados do fornecedor. As alterações serão salvas na API." : "Preencha os dados para adicionar um parceiro ao seu catálogo."}</p>
@@ -173,7 +171,7 @@ export default function SupplierForm({ supplier }: { supplier?: Supplier }) {
           </div>
         </div>
         <div className="form-actions">
-          <Link className="button button-quiet" href="/fornecedores">Cancelar</Link>
+          <StaticLink className="button button-quiet" href="/fornecedores/">Cancelar</StaticLink>
           <button className="button button-primary" type="submit" disabled={!ready || submitting}><span aria-hidden="true">{editing ? "✓" : "＋"}</span> {submitting ? "Salvando..." : editing ? "Salvar alterações" : "Cadastrar fornecedor"}</button>
         </div>
       </form>

@@ -1,6 +1,6 @@
 "use client";
 
-import Link from "next/link";
+import StaticLink from "../components/static-link";
 import Image from "next/image";
 import { useState, type FormEvent } from "react";
 import { useInventory } from "../inventory-store";
@@ -127,7 +127,7 @@ export default function AssociarPage() {
                 ) : (
                   <div className="inline-empty">
                     <p>Cadastre um fornecedor antes de criar uma associação.</p>
-                    <Link className="text-link" href="/fornecedores/cadastrar">Cadastrar fornecedor <span aria-hidden="true">→</span></Link>
+                    <StaticLink className="text-link" href="/fornecedores/cadastrar/">Cadastrar fornecedor <span aria-hidden="true">→</span></StaticLink>
                   </div>
                 )}
               </div>
@@ -160,7 +160,7 @@ export default function AssociarPage() {
           <span className="empty-icon" aria-hidden="true">↔</span>
           <h2>Cadastre um produto para começar</h2>
           <p>As associações são gerenciadas a partir dos produtos do seu catálogo.</p>
-          <Link className="button button-primary" href="/produtos/cadastrar">Cadastrar produto</Link>
+          <StaticLink className="button button-primary" href="/produtos/cadastrar/">Cadastrar produto</StaticLink>
         </div>
       )}
     </div>

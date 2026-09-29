@@ -1,7 +1,7 @@
 "use client";
 
-import Link from "next/link";
 import Image from "next/image";
+import StaticLink from "./components/static-link";
 import { useInventory } from "./inventory-store";
 
 export default function Home() {
@@ -21,10 +21,10 @@ export default function Home() {
             Acompanhe seus produtos e fornecedores em um só lugar.
           </p>
           <div className="welcome-actions">
-            <Link className="button button-light" href="/produtos/cadastrar">
+            <StaticLink className="button button-light" href="/produtos/cadastrar/">
               <span aria-hidden="true">＋</span> Cadastrar produto
-            </Link>
-            <Link className="welcome-link" href="/produtos">Ver produtos <span aria-hidden="true">→</span></Link>
+            </StaticLink>
+            <StaticLink className="welcome-link" href="/produtos/">Ver produtos <span aria-hidden="true">→</span></StaticLink>
           </div>
         </div>
         <div className="welcome-illustration" aria-hidden="true">
@@ -39,7 +39,7 @@ export default function Home() {
         <article className="stat-card">
           <span className="stat-icon icon-purple" aria-hidden="true">▦</span>
           <div><p>Produtos cadastrados</p><strong>{ready ? products.length : "—"}</strong></div>
-          <Link className="stat-link" href="/produtos" aria-label="Ver produtos">↗</Link>
+          <StaticLink className="stat-link" href="/produtos/" aria-label="Ver produtos">↗</StaticLink>
         </article>
         <article className="stat-card">
           <span className="stat-icon icon-green" aria-hidden="true">▤</span>
@@ -49,7 +49,7 @@ export default function Home() {
         <article className="stat-card">
           <span className="stat-icon icon-orange" aria-hidden="true">♧</span>
           <div><p>Fornecedores</p><strong>{ready ? suppliers.length : "—"}</strong></div>
-          <Link className="stat-link" href="/fornecedores" aria-label="Ver fornecedores">↗</Link>
+          <StaticLink className="stat-link" href="/fornecedores/" aria-label="Ver fornecedores">↗</StaticLink>
         </article>
         <article className="stat-card">
           <span className="stat-icon icon-red" aria-hidden="true">⌁</span>
@@ -66,28 +66,28 @@ export default function Home() {
           </div>
         </div>
         <div className="quick-grid">
-          <Link className="quick-card" href="/produtos/cadastrar">
+          <StaticLink className="quick-card" href="/produtos/cadastrar/">
             <span className="quick-icon quick-purple" aria-hidden="true">＋</span>
             <span><strong>Novo produto</strong><small>Adicione um item ao seu estoque</small></span>
             <span className="quick-arrow" aria-hidden="true">→</span>
-          </Link>
-          <Link className="quick-card" href="/fornecedores/cadastrar">
+          </StaticLink>
+          <StaticLink className="quick-card" href="/fornecedores/cadastrar/">
             <span className="quick-icon quick-orange" aria-hidden="true">♧</span>
             <span><strong>Novo fornecedor</strong><small>Cadastre um parceiro comercial</small></span>
             <span className="quick-arrow" aria-hidden="true">→</span>
-          </Link>
-          <Link className="quick-card" href="/associar">
+          </StaticLink>
+          <StaticLink className="quick-card" href="/associar/">
             <span className="quick-icon quick-green" aria-hidden="true">↔</span>
             <span><strong>Associar fornecedor</strong><small>Vincule parceiros aos produtos</small></span>
             <span className="quick-arrow" aria-hidden="true">→</span>
-          </Link>
+          </StaticLink>
         </div>
       </section>
 
       <section className="recent-section">
         <div className="section-heading">
           <div><p className="eyebrow">SEU CATÁLOGO</p><h2>Produtos recentes</h2></div>
-          <Link className="text-link" href="/produtos">Ver todos <span aria-hidden="true">→</span></Link>
+          <StaticLink className="text-link" href="/produtos/">Ver todos <span aria-hidden="true">→</span></StaticLink>
         </div>
         {products.length ? (
           <div className="table-wrap">
@@ -110,7 +110,7 @@ export default function Home() {
             <span className="empty-icon" aria-hidden="true">▦</span>
             <h3>Nenhum produto por aqui, ainda</h3>
             <p>Cadastre seu primeiro produto e comece a organizar o estoque.</p>
-            <Link className="button button-primary" href="/produtos/cadastrar">Cadastrar produto</Link>
+            <StaticLink className="button button-primary" href="/produtos/cadastrar/">Cadastrar produto</StaticLink>
           </div>
         )}
       </section>

@@ -1,9 +1,8 @@
 "use client";
 
 import Image from "next/image";
-import Link from "next/link";
-import { useRouter } from "next/navigation";
 import { useState, type ChangeEvent, type FormEvent } from "react";
+import StaticLink, { navigateToStaticRoute } from "./static-link";
 import { digitsOnly } from "../form-utils";
 import { useInventory, type Product } from "../inventory-store";
 
@@ -43,7 +42,6 @@ function fieldsFromProduct(product?: Product): ProductFields {
 }
 
 export default function ProductForm({ product }: { product?: Product }) {
-  const router = useRouter();
   const { products, addProduct, updateProduct, ready } = useInventory();
   const editing = !!product;
   const [fields, setFields] = useState(() => fieldsFromProduct(product));
@@ -132,7 +130,7 @@ export default function ProductForm({ product }: { product?: Product }) {
     try {
       if (product) {
         await updateProduct(product.id, data);
-        router.push("/produtos");
+        navigateToStaticRoute("/produtos/");
         return;
       }
       await addProduct(data);
@@ -157,7 +155,7 @@ export default function ProductForm({ product }: { product?: Product }) {
     <div className="content-page form-page">
       <div className="page-heading">
         <div>
-          <Link className="back-link" href="/produtos"><span aria-hidden="true">←</span> Voltar para produtos</Link>
+          <StaticLink className="back-link" href="/produtos/"><span aria-hidden="true">←</span> Voltar para produtos</StaticLink>
           <p className="eyebrow">CATÁLOGO DE ESTOQUE</p>
           <h1>{editing ? "Editar produto" : "Cadastro de produto"}</h1>
           <p>{editing ? "Atualize os dados do produto. As alterações serão salvas na API." : "Adicione as informações do item que deseja acompanhar."}</p>
@@ -227,7 +225,7 @@ export default function ProductForm({ product }: { product?: Product }) {
           </div>
         </div>
         <div className="form-actions">
-          <Link className="button button-quiet" href="/produtos">Cancelar</Link>
+          <StaticLink className="button button-quiet" href="/produtos/">Cancelar</StaticLink>
           <button className="button button-primary" type="submit" disabled={!ready || submitting}><span aria-hidden="true">{editing ? "✓" : "＋"}</span> {submitting ? "Salvando..." : editing ? "Salvar alterações" : "Cadastrar produto"}</button>
         </div>
       </form>
