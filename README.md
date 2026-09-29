@@ -15,5 +15,14 @@
 ``` bash
 npm run dev
 ```
+
+## deploy estático no Render
+
+- Build Command: `npm run build`
+- Publish Directory: `out`
+- Configure `NEXT_PUBLIC_API_URL` com a URL base do backend. Essa variável é incorporada no build, então defina-a antes da publicação.
+
+As páginas de edição usam rotas estáticas com o ID na query string, por exemplo `/produtos/editar/?id=123` e `/fornecedores/editar/?id=123`.
+
 # artigos
 [Mastering API Testing with Supertest, Express.js, and Jest](https://www.dennisokeeffe.com/blog/2023-10-27-testing-express-apps-with-jest-and-supertest)

@@ -33,7 +33,7 @@ export default function ProdutosPage() {
                 </div>
                 <div className="product-quantity"><small>EM ESTOQUE</small><strong>{product.quantity}</strong><span>unidades</span></div>
                 <div className="product-actions">
-                  <Link className="button button-outline" href={`/produtos/${encodeURIComponent(product.id)}/editar`}>Editar</Link>
+                  <Link className="button button-outline" href={`/produtos/editar?id=${encodeURIComponent(product.id)}`}>Editar</Link>
                   <Link className="button button-quiet" href="/associar">Fornecedores <span aria-hidden="true">→</span></Link>
                 </div>
               </article>
