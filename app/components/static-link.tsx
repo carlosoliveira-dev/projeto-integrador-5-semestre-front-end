@@ -1,11 +1,8 @@
 import type { ComponentProps } from "react";
+import Link from "next/link";
 
-type StaticLinkProps = ComponentProps<"a">;
+type StaticLinkProps = ComponentProps<typeof Link>;
 
 export default function StaticLink({ href, ...props }: StaticLinkProps) {
-  return <a href={href} {...props} />;
-}
-
-export function navigateToStaticRoute(path: string) {
-  window.location.assign(new URL(path, window.location.origin).href);
+  return <Link href={href} prefetch={false} {...props} />;
 }

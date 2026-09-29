@@ -1,7 +1,8 @@
 "use client";
 
 import { useState, type FormEvent } from "react";
-import StaticLink, { navigateToStaticRoute } from "./static-link";
+import { useRouter } from "next/navigation";
+import StaticLink from "./static-link";
 import {
   digitsOnly,
   formatCnpj,
@@ -34,6 +35,7 @@ function fieldsFromSupplier(supplier?: Supplier): SupplierFields {
 }
 
 export default function SupplierForm({ supplier }: { supplier?: Supplier }) {
+  const router = useRouter();
   const { suppliers, addSupplier, updateSupplier, ready } = useInventory();
   const editing = !!supplier;
   const [fields, setFields] = useState(() => fieldsFromSupplier(supplier));
@@ -102,7 +104,7 @@ export default function SupplierForm({ supplier }: { supplier?: Supplier }) {
     try {
       if (supplier) {
         await updateSupplier(supplier.id, data);
-        navigateToStaticRoute("/fornecedores/");
+        router.push("/fornecedores/");
         return;
       }
       await addSupplier(data);

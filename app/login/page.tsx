@@ -1,10 +1,12 @@
 "use client";
 
 import { useState, type FormEvent } from "react";
-import StaticLink, { navigateToStaticRoute } from "../components/static-link";
+import { useRouter } from "next/navigation";
+import StaticLink from "../components/static-link";
 import { useInventory } from "../inventory-store";
 
 export default function LoginPage() {
+  const router = useRouter();
   const { signIn, signUp, user } = useInventory();
   const [registering, setRegistering] = useState(false);
   const [name, setName] = useState("");
@@ -23,7 +25,7 @@ export default function LoginPage() {
       else await signIn(email.trim(), password);
       setSuccess(true);
       setFeedback("Acesso realizado com sucesso. Você já pode usar o sistema.");
-      navigateToStaticRoute("/");
+      router.push("/");
     } catch (error) {
       setSuccess(false);
       setFeedback(

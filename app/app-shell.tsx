@@ -8,9 +8,13 @@ import { InventoryProvider, useInventory } from "./inventory-store";
 function ShellContents({ children }: { children: ReactNode }) {
   const pathname = usePathname();
   const { storageError, ready, user, signOut } = useInventory();
-  const isLoginPage = pathname === "/login" || pathname === "/login/";
-  const isActiveRoute = (href: string) =>
-    pathname === href || (href !== "/" && pathname.startsWith(`${href}/`));
+  const normalizedPathname = pathname.replace(/\/+$/, "") || "/";
+  const isLoginPage = normalizedPathname === "/login";
+  const isActiveRoute = (href: string) => {
+    const normalizedHref = href.replace(/\/+$/, "") || "/";
+    return normalizedPathname === normalizedHref ||
+      (normalizedHref !== "/" && normalizedPathname.startsWith(`${normalizedHref}/`));
+  };
 
   return (
     <>

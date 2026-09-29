@@ -2,7 +2,8 @@
 
 import Image from "next/image";
 import { useState, type ChangeEvent, type FormEvent } from "react";
-import StaticLink, { navigateToStaticRoute } from "./static-link";
+import { useRouter } from "next/navigation";
+import StaticLink from "./static-link";
 import { digitsOnly } from "../form-utils";
 import { useInventory, type Product } from "../inventory-store";
 
@@ -42,6 +43,7 @@ function fieldsFromProduct(product?: Product): ProductFields {
 }
 
 export default function ProductForm({ product }: { product?: Product }) {
+  const router = useRouter();
   const { products, addProduct, updateProduct, ready } = useInventory();
   const editing = !!product;
   const [fields, setFields] = useState(() => fieldsFromProduct(product));
@@ -130,7 +132,7 @@ export default function ProductForm({ product }: { product?: Product }) {
     try {
       if (product) {
         await updateProduct(product.id, data);
-        navigateToStaticRoute("/produtos/");
+        router.push("/produtos/");
         return;
       }
       await addProduct(data);
